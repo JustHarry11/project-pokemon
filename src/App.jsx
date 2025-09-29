@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pokemon, setPokemon] = useState(null);
+
+  const getRandomPokemon = async () => {
+    try {
+      const randomId = Math.floor(Math.random() * 1025) + 1;
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+      setPokemon(response.data);
+    } catch (error) {
+      console.error("Error fetching Pokémon:", error);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <h1 className="title">Random Pokémon Generator</h1>
+      <button className="btn" onClick={getRandomPokemon}>
+        Get Random Pokémon
+      </button>
+
+      {pokemon && (
+        <div className="pokemon-card">
+          <h2 className="pokemon-name">
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          </h2>
+          <img
+            className="pokemon-img"
+            src={pokemon.sprites.front_default}
+            alt={pokemon.name}
+          />
+
+          <div className="info">
+            <p><strong>Type:</strong> {pokemon.types.map(t => t.type.name).join(", ")}</p>
+            <p><strong>Abilities:</strong> {pokemon.abilities.map(a => a.ability.name).join(", ")}</p>
+          </div>
+
+          <div className="stats">
+            <h3>Base Stats</h3>
+            <ul>
+              {pokemon.stats.map(stat => (
+                <li key={stat.stat.name}>
+                  {stat.stat.name}: {stat.base_stat}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
