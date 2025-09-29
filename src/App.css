@@ -62,7 +62,44 @@
   margin-bottom: 15px;
 }
 
-/* Stats */
+.types {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Type Badges */
+.type-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Pokémon Type Colors */
+.type-badge.normal   { background: #A8A77A; }
+.type-badge.fire     { background: #EE8130; }
+.type-badge.water    { background: #6390F0; }
+.type-badge.electric { background: #F7D02C; color: black; }
+.type-badge.grass    { background: #7AC74C; }
+.type-badge.ice      { background: #96D9D6; }
+.type-badge.fighting { background: #C22E28; }
+.type-badge.poison   { background: #A33EA1; }
+.type-badge.ground   { background: #E2BF65; color: black; }
+.type-badge.flying   { background: #A98FF3; }
+.type-badge.psychic  { background: #F95587; }
+.type-badge.bug      { background: #A6B91A; }
+.type-badge.rock     { background: #B6A136; }
+.type-badge.ghost    { background: #735797; }
+.type-badge.dragon   { background: #6F35FC; }
+.type-badge.dark     { background: #705746; }
+.type-badge.steel    { background: #B7B7CE; color: black; }
+.type-badge.fairy    { background: #D685AD; }
+
+/* Stats Section */
 .stats h3 {
   margin-bottom: 10px;
 }
@@ -73,9 +110,42 @@
   font-size: 0.95rem;
 }
 
-.stats li {
-  background: #f2f2f2;
-  margin: 5px 0;
-  padding: 6px;
-  border-radius: 8px;
+/* Stat Row */
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+/* Stat Name */
+.stat-name {
+  width: 80px;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* Bar Container */
+.stat-bar {
+  flex: 1;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Filled Bar */
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+/* Stat Value */
+.stat-value {
+  width: 30px;
+  text-align: right;
+  font-size: 0.9rem;
 }

@@ -15,6 +15,8 @@ function App() {
     }
   };
 
+  const typeClass = (type) => `type-badge ${type}`;
+
   return (
     <div className="app">
       <h1 className="title">Random Pokémon Generator</h1>
@@ -34,16 +36,33 @@ function App() {
           />
 
           <div className="info">
-            <p><strong>Type:</strong> {pokemon.types.map(t => t.type.name).join(", ")}</p>
-            <p><strong>Abilities:</strong> {pokemon.abilities.map(a => a.ability.name).join(", ")}</p>
+            <p><strong>Type:</strong></p>
+            <div className="types">
+              {pokemon.types.map((t) => (
+                <span key={t.slot} className={typeClass(t.type.name)}>
+                  {t.type.name}
+                </span>
+              ))}
+            </div>
+            <p>
+              <strong>Abilities:</strong>{" "}
+              {pokemon.abilities.map((a) => a.ability.name).join(", ")}
+            </p>
           </div>
 
           <div className="stats">
             <h3>Base Stats</h3>
             <ul>
-              {pokemon.stats.map(stat => (
-                <li key={stat.stat.name}>
-                  {stat.stat.name}: {stat.base_stat}
+              {pokemon.stats.map((stat) => (
+                <li key={stat.stat.name} className="stat-item">
+                  <span className="stat-name">{stat.stat.name}</span>
+                  <div className="stat-bar">
+                    <div
+                      className="stat-fill"
+                      style={{ width: `${(stat.base_stat / 255) * 100}%` }}
+                    ></div>
+                  </div>
+                  <span className="stat-value">{stat.base_stat}</span>
                 </li>
               ))}
             </ul>
